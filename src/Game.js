@@ -34,13 +34,13 @@ class Game extends Component {
     }
 
     render() {
-        const cards = this.state.cards.map((card) => <Card image={card.image} suit={card.suit} value={card.value} />);
+        const cards = this.state.cards.map((card, idx) => <Card key={idx} image={card.image} suit={card.suit} value={card.value} />);
         return (
-            <div>
+            <div className='Game'>
                 <button onClick={this.drawCard} disabled={this.state.remaining === 0}>
                     Draw Card
                 </button>
-                {cards}
+                <div className='Cards'>{cards}</div>
             </div>
         );
     }
