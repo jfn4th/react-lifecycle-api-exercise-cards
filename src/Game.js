@@ -3,9 +3,16 @@ import Card from './Card';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const StyledGame = styled.div``;
+const StyledGame = styled.div`margin-top: 1em;`;
 
-const Button = styled.button``;
+const Button = styled.button`
+    background: #4d4d4d;
+    padding: 1em;
+    color: white;
+    font-size: 1.5em;
+    border: 0;
+    border-radius: 30px;
+`;
 
 const StyledCards = styled.div`
     text-align: center;
@@ -45,9 +52,9 @@ class Game extends Component {
     }
 
     setTransform() {
-        const tx = Math.floor(Math.random() * 6);
-        const ty = Math.floor(Math.random() * 6);
-        const rdeg = Math.floor(Math.random() * 60) - 30;
+        const tx = Math.floor(Math.random() * 40);
+        const ty = Math.floor(Math.random() * 40);
+        const rdeg = Math.floor(Math.random() * 75) - 45;
         // const transform = {
         //     tx,
         //     ty,
@@ -67,7 +74,7 @@ class Game extends Component {
         return (
             <StyledGame>
                 <Button onClick={this.drawCard} disabled={this.state.remaining === 0}>
-                    Draw Card
+                    Draw a Card!
                 </Button>
 
                 <StyledCards>{cards}</StyledCards>
