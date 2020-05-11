@@ -7,7 +7,10 @@ const StyledGame = styled.div``;
 
 const Button = styled.button``;
 
-const StyledCards = styled.div``;
+const StyledCards = styled.div`
+    text-align: center;
+    margin-top: 70px;
+`;
 
 class Game extends Component {
     static defaultProps = {};
@@ -45,10 +48,14 @@ class Game extends Component {
         const tx = Math.floor(Math.random() * 6);
         const ty = Math.floor(Math.random() * 6);
         const rdeg = Math.floor(Math.random() * 60) - 30;
+        // const transform = {
+        //     tx,
+        //     ty,
+        //     rdeg
+        // };
+
         const transform = {
-            tx,
-            ty,
-            rdeg
+            transform: `translate(${tx}px, ${ty}px) rotate(${rdeg}deg)`
         };
         return transform;
     }
@@ -62,6 +69,7 @@ class Game extends Component {
                 <Button onClick={this.drawCard} disabled={this.state.remaining === 0}>
                     Draw Card
                 </Button>
+
                 <StyledCards>{cards}</StyledCards>
             </StyledGame>
         );

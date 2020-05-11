@@ -1,21 +1,19 @@
-import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
+import React, { PureComponent } from 'react';
+import styled from 'styled-components';
 
-const StyledCard = styled.img`
+const StyledCard = styled.div`
     position: absolute;
-    transform: transform(${(props) => `${props.transform}, 20px`});
+    width: 100%;
 `;
 
-class Card extends Component {
+class Card extends PureComponent {
     render() {
         const { image, value, suit, transform } = this.props;
 
         return (
-            <StyledCard
-                style={{ transform: `translate(${transform.tx}px, ${transform.ty}px) rotate(${transform.rdeg}deg)` }}
-                src={image}
-                alt={`${value} of ${suit}`.toLowerCase()}
-            />
+            <StyledCard>
+                <img style={transform} src={image} alt={`${value} of ${suit}`.toLowerCase()} />;
+            </StyledCard>
         );
     }
 }
