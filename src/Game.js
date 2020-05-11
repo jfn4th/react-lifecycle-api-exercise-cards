@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import Card from './Card';
-import './Game.css';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const StyledGame = styled.div``;
+
+const Button = styled.button``;
+
+const StyledCards = styled.div``;
 
 class Game extends Component {
     static defaultProps = {};
@@ -13,6 +19,7 @@ class Game extends Component {
             cards: []
         };
         this.drawCard = this.drawCard.bind(this);
+        this.setTransform = this.setTransform.bind(this);
     }
 
     async componentDidMount() {
@@ -28,20 +35,35 @@ class Game extends Component {
         const card = {
             image: data.cards[0].image,
             value: data.cards[0].value,
-            suit: data.cards[0].suit
+            suit: data.cards[0].suit,
+            transform: this.setTransform()
         };
         this.setState((st) => ({ cards: [ ...st.cards, card ], remaining: st.remaining - 1 }));
     }
 
+    setTransform() {
+        const tx = Math.floor(Math.random() * 6);
+        const ty = Math.floor(Math.random() * 6);
+        const rdeg = Math.floor(Math.random() * 60) - 30;
+        const transform = {
+            tx,
+            ty,
+            rdeg
+        };
+        return transform;
+    }
+
     render() {
-        const cards = this.state.cards.map((card, idx) => <Card key={idx} image={card.image} suit={card.suit} value={card.value} />);
+        const cards = this.state.cards.map((card, idx) => (
+            <Card key={idx} image={card.image} suit={card.suit} value={card.value} transform={card.transform} />
+        ));
         return (
-            <div className='Game'>
-                <button onClick={this.drawCard} disabled={this.state.remaining === 0}>
+            <StyledGame>
+                <Button onClick={this.drawCard} disabled={this.state.remaining === 0}>
                     Draw Card
-                </button>
-                <div className='Cards'>{cards}</div>
-            </div>
+                </Button>
+                <StyledCards>{cards}</StyledCards>
+            </StyledGame>
         );
     }
 }
