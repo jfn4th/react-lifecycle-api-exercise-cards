@@ -20,8 +20,6 @@ const StyledCards = styled.div`
 `;
 
 class Game extends Component {
-    static defaultProps = {};
-
     constructor(props) {
         super(props);
 
@@ -55,12 +53,6 @@ class Game extends Component {
         const tx = Math.floor(Math.random() * 40);
         const ty = Math.floor(Math.random() * 40);
         const rdeg = Math.floor(Math.random() * 75) - 45;
-        // const transform = {
-        //     tx,
-        //     ty,
-        //     rdeg
-        // };
-
         const transform = {
             transform: `translate(${tx}px, ${ty}px) rotate(${rdeg}deg)`
         };
