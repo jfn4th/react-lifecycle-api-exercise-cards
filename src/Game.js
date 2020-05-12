@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Card from './Card';
 import axios from 'axios';
 import styled from 'styled-components';
-
+const API_BASE_URL = 'https://deckofcardsapi.com/api/deck';
 const StyledGame = styled.div`margin-top: 1em;`;
 
 const Button = styled.button`
@@ -31,19 +31,18 @@ class Game extends Component {
     }
 
     async componentDidMount() {
-        const url = 'https://deckofcardsapi.com/api/deck/new/shuffle/';
-        const response = await axios.get(url);
-        const data = response.data;
-        this.setState({ deckUrl: `https://deckofcardsapi.com/api/deck/${data.deck_id}/draw/`, remaining: data.remaining });
+        const deck = await axios.get(`${API_BASE_URL}/new/shuffle/`);
+        this.setState({ deckId: deck.data.deck_id, remaining: deck.data.remaining });
     }
 
     async drawCard() {
-        const response = await axios.get(this.state.deckUrl);
-        const data = response.data;
+        const id = this.state.deckId;
+        const cardUrl = `${API_BASE_URL}/${id}/draw/`;
+        const cardRes = await axios.get(cardUrl);
         const card = {
-            image: data.cards[0].image,
-            value: data.cards[0].value,
-            suit: data.cards[0].suit,
+            image: cardRes.data.cards[0].image,
+            value: cardRes.data.cards[0].value,
+            suit: cardRes.data.cards[0].suit,
             transform: this.setTransform()
         };
         this.setState((st) => ({ cards: [ ...st.cards, card ], remaining: st.remaining - 1 }));
