@@ -4,14 +4,31 @@ import axios from 'axios';
 import styled from 'styled-components';
 const API_BASE_URL = 'https://deckofcardsapi.com/api/deck';
 
-const StyledGame = styled.div`margin-top: 1em;`;
+const StyledGame = styled.div`
+    margin-top: 1em;
+    font-family: "Slabo 27px", serif;
+`;
+const Header = styled.h1`
+    color: azure;
+    font-size: 40px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+`;
 const Button = styled.button`
-    background: #4d4d4d;
-    padding: 1em;
-    color: white;
-    font-size: 1.5em;
-    border: 0;
-    border-radius: 30px;
+    background: none;
+    border: 2px solid;
+    outline: none;
+    font: inherit;
+    margin: 0.5em;
+    padding: 1em 2em;
+    color: #009688;
+    transition: 0.25s;
+
+    &:hover {
+        border-color: #4caf50;
+        color: white;
+        box-shadow: inset 0 0 0 2em #4caf50;
+    }
 `;
 const StyledCards = styled.div`
     text-align: center;
@@ -49,6 +66,7 @@ class Game extends Component {
         const cards = this.state.cards.map((card) => <Card key={card.id} image={card.image} name={card.name} />);
         return (
             <StyledGame>
+                <Header>♦ Card Dealer ♦</Header>
                 <Button onClick={this.drawCard} disabled={this.state.remaining === 0}>
                     Draw a Card!
                 </Button>
