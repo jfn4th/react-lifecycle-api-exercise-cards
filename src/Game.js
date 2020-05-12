@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import Card from './Card';
 import axios from 'axios';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 const API_BASE_URL = 'https://deckofcardsapi.com/api/deck';
+
+const textStyles = css`
+    color: azure;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+`;
 
 const StyledGame = styled.div`
     margin-top: 1em;
     font-family: "Slabo 27px", serif;
 `;
-const Header = styled.h1`
-    color: azure;
-    font-size: 40px;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-`;
+const Header = styled.h1`${textStyles} font-size: 40px;`;
+const Subtitle = styled.h2`${textStyles} font-size: 20px;`;
 const Button = styled.button`
     background: none;
     border: 2px solid;
@@ -67,6 +69,7 @@ class Game extends Component {
         return (
             <StyledGame>
                 <Header>♦ Card Dealer ♦</Header>
+                <Subtitle>♦ A little demo made with react ♦</Subtitle>
                 <Button onClick={this.drawCard} disabled={this.state.remaining === 0}>
                     Draw a Card!
                 </Button>
