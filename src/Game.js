@@ -40,9 +40,9 @@ class Game extends Component {
         const cardUrl = `${API_BASE_URL}/${id}/draw/`;
         const cardRes = await axios.get(cardUrl);
         const card = {
+            id: cardRes.data.cards[0].code,
             image: cardRes.data.cards[0].image,
-            value: cardRes.data.cards[0].value,
-            suit: cardRes.data.cards[0].suit,
+            name: `${cardRes.data.cards[0].value} of ${cardRes.data.cards[0].suit}`,
             transform: this.setTransform()
         };
         this.setState((st) => ({ cards: [ ...st.cards, card ], remaining: st.remaining - 1 }));
@@ -59,9 +59,7 @@ class Game extends Component {
     }
 
     render() {
-        const cards = this.state.cards.map((card, idx) => (
-            <Card key={idx} image={card.image} suit={card.suit} value={card.value} transform={card.transform} />
-        ));
+        const cards = this.state.cards.map((card) => <Card key={card.id} image={card.image} name={card.name} transform={card.transform} />);
         return (
             <StyledGame>
                 <Button onClick={this.drawCard} disabled={this.state.remaining === 0}>

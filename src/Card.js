@@ -8,11 +8,11 @@ const StyledCard = styled.div`
 
 class Card extends PureComponent {
     render() {
-        const { image, value, suit, transform } = this.props;
+        const { image, name, transform } = this.props;
 
         return (
             <StyledCard>
-                <img style={transform} src={image} alt={`${value} of ${suit}`.toLowerCase()} />;
+                <img style={transform} src={image} alt={name.toLowerCase()} />;
             </StyledCard>
         );
     }
